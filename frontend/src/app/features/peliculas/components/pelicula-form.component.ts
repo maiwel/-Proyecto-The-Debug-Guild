@@ -60,7 +60,14 @@ export class PeliculaFormComponent implements OnInit {
 
   guardar() {
     if (this.form.valid) {
-      this.peliculaService.crearPelicula(this.form.value).subscribe(() => {
+      const generoSeleccionado = this.generos().find(g => g.id == this.form.value.generoId);
+      const pelicula = {
+        titulo: this.form.value.titulo,
+        anyo: this.form.value.anyo,
+        director: this.form.value.director,
+        genero: generoSeleccionado
+      };
+      this.peliculaService.crearPelicula(pelicula as any).subscribe(() => {
         this.router.navigate(['/peliculas']);
       });
     }

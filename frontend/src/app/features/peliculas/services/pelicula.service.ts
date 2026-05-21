@@ -24,7 +24,11 @@ export class PeliculaService {
     return this.http.get<Pelicula>(`${this.apiUrl}/peliculas/${id}`);
   }
 
-  crearPelicula(pelicula: Pelicula): Observable<Pelicula> {
+  crearPelicula(pelicula: any): Observable<Pelicula> {
     return this.http.post<Pelicula>(`${this.apiUrl}/peliculas`, pelicula);
+  }
+
+  borrarPelicula(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/peliculas/${id}`);
   }
 }

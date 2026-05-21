@@ -8,5 +8,5 @@ export interface Pelicula {
   titulo: string;
   anyo: number;
   director: string;
-  generoId: number;
+  genero: Genero;
 }
