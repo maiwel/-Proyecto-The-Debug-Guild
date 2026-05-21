@@ -1,31 +1,30 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Pelicula } from '../models/pelicula.model';
+import { Observable } from 'rxjs';
+import { Pelicula, Genero } from '../models/pelicula.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class PeliculaService {
-  private http = inject(HttpClient);
-  private peliculasMock: Pelicula[] = [/* datos */];
+
+  private apiUrl = 'http://localhost:8080/api';
+
+  constructor(private http: HttpClient) {}
+
+  getGeneros(): Observable<Genero[]> {
+    return this.http.get<Genero[]>(`${this.apiUrl}/generos`);
+  }
 
   getPeliculas(): Observable<Pelicula[]> {
-    return of(this.peliculasMock);
+    return this.http.get<Pelicula[]>(`${this.apiUrl}/peliculas`);
   }
 
-  getPelicula(id: number): Observable<Pelicula | undefined> {
-    return of(this.peliculasMock.find(p => p.id === id));
+  getPelicula(id: number): Observable<Pelicula> {
+    return this.http.get<Pelicula>(`${this.apiUrl}/peliculas/${id}`);
   }
 
-  buscar(termino: string): Observable<Pelicula[]> {
-    const resultado = this.peliculasMock.filter(p =>
-      p.titulo.toLowerCase().includes(termino.toLowerCase())
-    );
-    return of(resultado);
-  }
-
-  crear(pelicula: Omit<Pelicula, 'id'>): Observable<Pelicula> {
-    const nueva = { ...pelicula, id: Date.now() } as Pelicula;
-    this.peliculasMock.push(nueva);
-    return of(nueva);
+  crearPelicula(pelicula: Pelicula): Observable<Pelicula> {
+    return this.http.post<Pelicula>(`${this.apiUrl}/peliculas`, pelicula);
   }
 }

@@ -1,28 +1,17 @@
-import { Component, signal } from '@angular/core';
-import { Pelicula } from '../../models/pelicula.model';
-import { PeliculaCard } from '../pelicula-card/pelicula-card';
-
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-pelicula-list',
-  imports: [PeliculaCard], // ← Importación directa
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterModule],
   template: `
-    <h1>🎬 Catálogo de Películas</h1>
-    <div class="peliculas-grid">
-      @for (pelicula of peliculas(); track pelicula.id) {
-        <app-pelicula-card
-          [pelicula]="pelicula"
-          (selected)="onPeliculaSelected($event)" />
-      } @empty {
-        <p>No hay películas disponibles</p>
-      }
-    </div>
+    <nav>
+      <a routerLink="/peliculas">🎬 Películas</a>
+    </nav>
+    <router-outlet />
   `
 })
-export class PeliculaList {
-  peliculas = signal<Pelicula[]>([/* datos mock */]);
-
-  onPeliculaSelected(pelicula: Pelicula) {
-    console.log('Seleccionada:', pelicula.titulo);
-  }
+export class AppComponent {
+  title = 'frontend';
 }

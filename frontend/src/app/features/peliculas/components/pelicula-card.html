@@ -1,8 +1,0 @@
-    <div class="pelicula-card" [appHighlight]="'lightblue'">
-  <h3>{{ pelicula().titulo }}</h3>
-  <p>🎬 {{ pelicula().director }}</p>
-  <p>{{ pelicula().genero }} ({{ pelicula().anio }})
-        · {{ pelicula().duracion | duracion }}</p>
-  <p>⭐ {{ pelicula().puntuacion }}/10</p>
-  <button (click)="selected.emit(pelicula())">Ver detalle</button>
-</div>

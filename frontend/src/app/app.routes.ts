@@ -1,12 +1,9 @@
 import { Routes } from '@angular/router';
+import { PeliculaListComponent } from './features/peliculas/components/pelicula-list.component';
+import { PeliculaFormComponent } from './features/peliculas/components/pelicula-form.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/peliculas', pathMatch: 'full' },
-  {
-    path: 'peliculas',
-    loadChildren: () =>
-      import('./features/peliculas/peliculas.routes')
-        .then(m => m.PELICULAS_ROUTES)
-  },
-  { path: '**', redirectTo: '/peliculas' }
+  { path: '', redirectTo: 'peliculas', pathMatch: 'full' },
+  { path: 'peliculas', component: PeliculaListComponent },
+  { path: 'peliculas/nueva', component: PeliculaFormComponent }
 ];
