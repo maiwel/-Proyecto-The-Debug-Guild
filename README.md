@@ -15,17 +15,6 @@ Aplicación fullstack para gestionar un catálogo de películas, desarrollada co
 
 ---
 
-## 🌿 Ramas
-
-| Rama | Uso |
-|---|---|
-| `main` | Código estable, producción |
-| `develop` | Rama de integración |
-| `feature/*` | Nuevas funcionalidades |
-| `fix/*` | Corrección de bugs |
-
----
-
 ## 👥 Equipo
 
 | Nombre |
